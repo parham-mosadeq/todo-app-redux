@@ -1,7 +1,13 @@
-const addTodo = (e) => {
+const textTodo = (e) => {
+  return {
+    type: 'TEXT_TODO',
+    payload: e,
+  };
+};
+
+const addTodo = () => {
   return {
     type: 'ADD_TODO',
-    payload: e,
   };
 };
 
@@ -19,4 +25,11 @@ const doneTodo = (id) => {
   };
 };
 
-export { addTodo, doneTodo, editTodo };
+const removeTodo = (id) => {
+  return {
+    type: 'REMOVE_TODO',
+    payload: id,
+  };
+};
+
+export { addTodo, textTodo, doneTodo, editTodo, removeTodo };

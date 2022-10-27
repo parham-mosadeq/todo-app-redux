@@ -9,11 +9,9 @@ import Todos from './components/Todos';
 
 const App = () => {
   return (
-    <main>
-      <h1>Todos</h1>
-
+    <main className=' h-screen flex flex-row align-center justify-center text-center  '>
       <Provider store={store}>
-        <article>
+        <article className='w-screen'>
           <Todos />
         </article>
       </Provider>
