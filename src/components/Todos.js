@@ -25,7 +25,7 @@ const Todos = () => {
     <div className='bg-purple-500  h-screen capitalize  pt-5'>
       {/* form start */}
       <form
-        className=' mt-2 w-1/2 mr-auto ml-auto rounded-xl bg-purple-600 shadow-lg h-1/5   pt-8'
+        className=' mt-2 w-1/2 mr-auto ml-auto rounded-xl bg-purple-600 shadow-lg h-1/5 pt-8'
         onClick={(e) => e.preventDefault()}
       >
         {/* input start */}
@@ -36,13 +36,13 @@ const Todos = () => {
             onChange={(e) => dispatch(textTodo(e.target.value))}
             type='text'
             placeholder='what to do?'
-            className='bg-teal-900 shadow-xl rounded-md  capitalize focus:outline-0 hover: cursor-pointer p-2'
+            className='bg-teal-900 shadow-xl rounded-md w-full text-center text-white  capitalize focus:outline-0 hover: cursor-pointer p-2'
           />
         </div>
         {/* input end */}
 
         {/* button start */}
-        <div className='mt-5 text-red-300  rounded-md shadow-xl w-1/3 mr-auto ml-auto bg-pink-900'>
+        <div className='mt-5 text-red-300  rounded-md shadow-xl w-1/2 mr-auto ml-auto bg-pink-900'>
           <button
             className='capitalize tracking-wide pl-1 pr-1 pt-2 pb-2 hover:shadow-lg'
             onClick={() => dispatch(addTodo())}
@@ -68,7 +68,9 @@ const Todos = () => {
             );
           })
         ) : (
-          <h2>add a todo...</h2>
+          <h2 className='text-blue-100 tracking-widest font-light'>
+            add a todo...
+          </h2>
         )}
         {/* todo end */}
       </article>

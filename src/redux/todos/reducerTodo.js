@@ -4,6 +4,7 @@ const initState = {
   textTodo: '',
   todos: [],
   isDone: false,
+  isEditing:false
 };
 const reducerTodo = (state = initState, action) => {
   switch (action.type) {
