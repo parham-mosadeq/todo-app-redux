@@ -4,7 +4,8 @@ const initState = {
   textTodo: '',
   todos: [],
   isDone: false,
-  isEditing:false
+  isEditing: false,
+  id: null,
 };
 const reducerTodo = (state = initState, action) => {
   switch (action.type) {
@@ -15,18 +16,27 @@ const reducerTodo = (state = initState, action) => {
       };
 
     case 'ADD_TODO':
-      if (state.textTodo) {
-        state.todos.push({ id: uuidv4(), txt: state.textTodo });
-        return {
-          ...state,
-          textTodo: '',
-        };
-      } else {
-        return {
-          ...state,
-          textTodo: '',
-        };
-      }
+      state.todos.push({ id: uuidv4(), txt: state.textTodo });
+
+      return {
+        ...state,
+        textTodo: '',
+        isEditing: false,
+      };
+
+    // if (state.textTodo) {
+    //   state.todos.push({ id: uuidv4(), txt: state.textTodo });
+    //   return {
+    //     ...state,
+    //     textTodo: '',
+    //     isEditing: false,
+    //   };
+    // } else {
+    //   return {
+    //     ...state,
+    //     textTodo: '',
+    //   };
+    // }
 
     case 'REMOVE_TODO':
       const newItems = state.todos.filter((item) => {
@@ -35,22 +45,42 @@ const reducerTodo = (state = initState, action) => {
       return {
         ...state,
         todos: newItems,
+        textTodo: '',
       };
 
     case 'DONE_TODO':
       const finished = state.todos.find((item) => item.id === action.payload);
-      console.log(finished.txt);
-      return {
-        ...state,
-        isDone: !state.isDone,
-      };
+      if (action.payload === finished.id) {
+        console.log(finished);
+        return {
+          ...state,
+          isDone: true,
+          textTodo: '',
+        };
+      } else {
+        return {
+          ...state,
+          isDone: false,
+          textTodo: '',
+        };
+      }
 
     case 'EDIT_TODO':
       const editedItem = state.todos.find((item) => item.id === action.payload);
-
       return {
         ...state,
-        textTodo: `edited: - ${editedItem.txt}`,
+        textTodo: editedItem.txt,
+        isEditing: !state.isEditing,
+      };
+
+    case 'CLOSE_EDIT':
+      // const removeEditedItem = state.todos.find(
+      //   (item) => item.id === action.payload
+      // );
+      return {
+        ...state,
+        textTodo: '',
+        isEditing: false,
       };
 
     default:

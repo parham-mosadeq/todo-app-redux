@@ -5,9 +5,10 @@ const textTodo = (e) => {
   };
 };
 
-const addTodo = () => {
+const addTodo = (e) => {
   return {
     type: 'ADD_TODO',
+    payload: e,
   };
 };
 
@@ -32,4 +33,11 @@ const removeTodo = (id) => {
   };
 };
 
-export { addTodo, textTodo, doneTodo, editTodo, removeTodo };
+const closeEdit = (id) => {
+  return {
+    type: 'CLOSE_EDIT',
+    payload: id,
+  };
+};
+
+export { addTodo, textTodo, doneTodo, editTodo, removeTodo, closeEdit };
