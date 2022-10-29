@@ -19,13 +19,6 @@ const editTodo = (id) => {
   };
 };
 
-const doneTodo = (id) => {
-  return {
-    type: 'DONE_TODO',
-    payload: id,
-  };
-};
-
 const removeTodo = (id) => {
   return {
     type: 'REMOVE_TODO',
@@ -40,4 +33,4 @@ const closeEdit = (id) => {
   };
 };
 
-export { addTodo, textTodo, doneTodo, editTodo, removeTodo, closeEdit };
+export { addTodo, textTodo, editTodo, removeTodo, closeEdit };

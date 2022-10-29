@@ -3,7 +3,6 @@ import { v4 as uuidv4 } from 'uuid';
 const initState = {
   textTodo: '',
   todos: [],
-  isDone: false,
   isEditing: false,
   id: null,
 };
@@ -16,27 +15,21 @@ const reducerTodo = (state = initState, action) => {
       };
 
     case 'ADD_TODO':
-      state.todos.push({ id: uuidv4(), txt: state.textTodo });
+      
+      if (state.isEditing) {
+        const itemId = state.id;
+        const findItem = state.todos.find((item) => item.id === itemId);
+        findItem.txt = state.textTodo;
+      } else {
+        //pushing new entered data to todos array
+        state.todos.push({ id: uuidv4(), txt: state.textTodo });
+      }
 
       return {
         ...state,
         textTodo: '',
         isEditing: false,
       };
-
-    // if (state.textTodo) {
-    //   state.todos.push({ id: uuidv4(), txt: state.textTodo });
-    //   return {
-    //     ...state,
-    //     textTodo: '',
-    //     isEditing: false,
-    //   };
-    // } else {
-    //   return {
-    //     ...state,
-    //     textTodo: '',
-    //   };
-    // }
 
     case 'REMOVE_TODO':
       const newItems = state.todos.filter((item) => {
@@ -48,35 +41,17 @@ const reducerTodo = (state = initState, action) => {
         textTodo: '',
       };
 
-    case 'DONE_TODO':
-      const finished = state.todos.find((item) => item.id === action.payload);
-      if (action.payload === finished.id) {
-        console.log(finished);
-        return {
-          ...state,
-          isDone: true,
-          textTodo: '',
-        };
-      } else {
-        return {
-          ...state,
-          isDone: false,
-          textTodo: '',
-        };
-      }
-
     case 'EDIT_TODO':
       const editedItem = state.todos.find((item) => item.id === action.payload);
+
       return {
         ...state,
         textTodo: editedItem.txt,
         isEditing: !state.isEditing,
+        id: action.payload,
       };
 
     case 'CLOSE_EDIT':
-      // const removeEditedItem = state.todos.find(
-      //   (item) => item.id === action.payload
-      // );
       return {
         ...state,
         textTodo: '',
