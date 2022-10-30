@@ -8,6 +8,9 @@ import { textTodo, addTodo } from '../redux/todos/actionTodo';
 // component
 import Todo from './Todo';
 
+// styles
+import { Article, MainContainer, FormBtn } from '../styles/styledComponents';
+
 const Todos = () => {
   const inputData = useSelector((state) => state.todoReducer.textTodo);
 
@@ -23,10 +26,10 @@ const Todos = () => {
   });
 
   return (
-    <div className='bg-purple-500  h-screen capitalize h-screen pt-5'>
+    <MainContainer>
       {/* form start */}
       <form
-        className=' mt-2 w-1/2 mr-auto ml-auto rounded-xl bg-purple-600 shadow-lg h-1/5 pt-8'
+        className='w-1/2 mr-auto ml-auto rounded-xl bg-purple-600 shadow-lg h-1/5 pt-8'
         onClick={(e) => e.preventDefault()}
       >
         {/* input start */}
@@ -43,21 +46,17 @@ const Todos = () => {
         {/* input end */}
 
         {/* button start */}
-        <div className='mt-5 text-red-300  rounded-md shadow-xl w-1/2 mr-auto ml-auto bg-pink-900'>
-          <button
-            className='capitalize tracking-wide pl-1 pr-1 pt-2 pb-2 hover:shadow-lg'
-            onClick={() => dispatch(addTodo())}
-          >
+        <div>
+          <FormBtn onClick={() => dispatch(addTodo())}>
             {isEditing ? ' finished' : 'add my todo'}
-          </button>
+          </FormBtn>
+          {/* button end */}
         </div>
       </form>
       {/* form end */}
 
-      {/* button end */}
-
       {/* show todo */}
-      <article className='bg-sky-600 max-h-96 w-6/12 mr-auto ml-auto mt-5 rounded-lg p-4 border-4'>
+      <Article>
         {/* todo start */}
         {todosArray ? (
           todosArray.map((todo) => {
@@ -72,14 +71,12 @@ const Todos = () => {
             );
           })
         ) : (
-          <h2 className='text-blue-100 tracking-widest font-light'>
-            add a todo...
-          </h2>
+          <h2>add a todo...</h2>
         )}
         {/* todo end */}
-      </article>
+      </Article>
       {/* show todo */}
-    </div>
+    </MainContainer>
   );
 };
 

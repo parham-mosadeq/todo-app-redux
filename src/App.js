@@ -1,21 +1,26 @@
 import React from 'react';
-// redux
+
+// redux tools
 import { Provider } from 'react-redux';
 
+// redux
 import store from './redux/store';
 
 // component
 import Todos from './components/Todos';
 
+// style
+import { Main } from './styles/styledComponents';
+
 const App = () => {
   return (
-    <main className=' h-screen flex flex-row align-center justify-center text-center  '>
+    <Main>
       <Provider store={store}>
         <article className='w-screen'>
           <Todos />
         </article>
       </Provider>
-    </main>
+    </Main>
   );
 };
 

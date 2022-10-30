@@ -33,4 +33,11 @@ const closeEdit = (id) => {
   };
 };
 
-export { addTodo, textTodo, editTodo, removeTodo, closeEdit };
+const doneTodo = (id) => {
+  return {
+    type: 'DONE_TODO',
+    payload: id,
+  };
+};
+
+export { addTodo, doneTodo, textTodo, editTodo, removeTodo, closeEdit };

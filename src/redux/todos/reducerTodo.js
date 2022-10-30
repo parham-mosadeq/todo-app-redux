@@ -4,6 +4,7 @@ const initState = {
   textTodo: '',
   todos: [],
   isEditing: false,
+  isDone: false,
   id: null,
 };
 const reducerTodo = (state = initState, action) => {
@@ -15,7 +16,6 @@ const reducerTodo = (state = initState, action) => {
       };
 
     case 'ADD_TODO':
-      
       if (state.isEditing) {
         const itemId = state.id;
         const findItem = state.todos.find((item) => item.id === itemId);
@@ -39,6 +39,16 @@ const reducerTodo = (state = initState, action) => {
         ...state,
         todos: newItems,
         textTodo: '',
+        isDone: false,
+      };
+
+    case 'DONE_TODO':
+      return {
+        ...state,
+        textTodo: '',
+        isDone: !state.isDone,
+        isEditing: false,
+        id: action.payload,
       };
 
     case 'EDIT_TODO':
@@ -56,6 +66,7 @@ const reducerTodo = (state = initState, action) => {
         ...state,
         textTodo: '',
         isEditing: false,
+        isDone: false,
       };
 
     default:
