@@ -58,7 +58,7 @@ const Todos = () => {
       {/* show todo */}
       <Article>
         {/* todo start */}
-        {todosArray ? (
+        {todosArray.length > 0 ? (
           todosArray.map((todo) => {
             const { id, txt } = todo;
             return (
@@ -71,7 +71,9 @@ const Todos = () => {
             );
           })
         ) : (
-          <h2>add a todo...</h2>
+          <h2 className='font-bold tracking-wider capitalize text-pink-200 mt-7'>
+            add a todo...
+          </h2>
         )}
         {/* todo end */}
       </Article>
