@@ -11,6 +11,12 @@ import Todo from './Todo';
 // styles
 import { Article, MainContainer, FormBtn } from '../styles/styledComponents';
 
+const data = localStorage.getItem('todos');
+
+const d = JSON.parse(data);
+
+console.log(d);
+
 const Todos = () => {
   const inputData = useSelector((state) => state.todoReducer.textTodo);
 
@@ -23,7 +29,7 @@ const Todos = () => {
 
   useEffect(() => {
     focusOnInput.current.focus();
-  });
+  }, [todosArray.length]);
 
   return (
     <MainContainer>
@@ -58,7 +64,7 @@ const Todos = () => {
       {/* show todo */}
       <Article>
         {/* todo start */}
-        {todosArray.length > 0 ? (
+        {todosArray ? (
           todosArray.map((todo) => {
             const { id, txt } = todo;
             return (

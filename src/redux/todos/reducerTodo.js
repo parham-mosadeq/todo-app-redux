@@ -46,7 +46,7 @@ const reducerTodo = (state = initState, action) => {
       return {
         ...state,
         textTodo: '',
-        isDone: !state.isDone,
+        isDone: true,
         isEditing: false,
         id: action.payload,
       };
